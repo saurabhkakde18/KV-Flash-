@@ -43,10 +43,10 @@ interface AuthContextType {
   openSignOutLockModal: () => void;
   closeSignOutLockModal: () => void;
   requestSignOutOtp: () => Promise<{ success: boolean; otp: string; message: string }>;
-  verifySignOutOtp: (enteredOtp: string) => Promise<{ success: boolean; message: string }>;
+   verifySignOutOtp: (enteredOtp: string) => Promise<{ success: boolean; message: string }>;
+  instantSignOut: () => Promise<void>;
   loginAsAdmin: (empCode?: string) => void;
-}
-
+  
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const LOCAL_USERS_KEY = "kv_flash_users_directory";
