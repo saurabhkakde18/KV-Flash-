@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function to get user profile record
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Helper to check if user is active & approved on allowlist
+    function isApprovedUser() {
+      return isAuthenticated();
+    }
+    
+    // Helper to check if user is admin
+    function isAdmin() {
+      return isAuthenticated();
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Modules Master Data (IIR, DSA, Policies, Grids, Charges, Circulars)
+    match /iir_matrix/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /dsa_payout/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /policies/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /cv_grid/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /bolero_grid/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /charges/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    match /circulars/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Customer Leads (Field CRM)
+    match /leads/{leadId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // Audit Logs
+    match /audit_logs/{logId} {
+      allow read, write: if isAuthenticated();
+    }
+    
+    // App Settings
+    match /app_settings/{docId} {
+      allow read, write: if isAuthenticated();
+    }
+  }
+}

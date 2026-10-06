@@ -1,0 +1,21 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Check if user is authenticated and completed 2FA OTP verification
+    function isOtpVerified() {
+      return request.auth != null && request.auth.token.otpVerified == true;
+    }
+
+    // Vehicle Circulars and Reference Documents
+    match /circulars/{allPaths=**} {
+      allow read: if isOtpVerified();
+      allow write: if isOtpVerified() && request.auth.token.role == 'admin';
+    }
+
+    // Customer Leads Attachment Data
+    match /leads/{leadId}/{allPaths=**} {
+      allow read, write: if isOtpVerified();
+    }
+  }
+}

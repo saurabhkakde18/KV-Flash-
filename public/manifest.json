@@ -1,0 +1,24 @@
+{
+  "name": "KV Flash - Vehicle Finance",
+  "short_name": "KV Flash",
+  "description": "Minimalistic reference and calculator app for vehicle-finance field staff (DSA / loan officers) in India. Kredit Venture.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0F1A",
+  "theme_color": "#0B0F1A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
